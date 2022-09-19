@@ -1,0 +1,41 @@
+{
+  "Tkinter initializer": {
+    "scope": "python",
+    "prefix": "tkinit",
+    "body": [
+      "import tkinter as tk",
+      "root = tk.Tk()",
+      "root.title(\"$title\")",
+      "root.geometry(\"${height}x${width}\")",
+      "\nroot.mainloop()"
+    ],
+    "description": "Basic toolkit for tkinter"
+  },
+
+  "Create OptionMenu": {
+    "scope": "python",
+    "prefix": "tkcrom",
+    "body": [
+      "options = ($options)",
+      "variable = tk.StringVar($root)",
+      "variable.set(options[0])",
+      "$options_menu_name = tk.OptionMenu(root, variable, *options)",
+      "$options_menu_name.pack()"
+    ],
+    "description": "Creates an Option menu"
+  },
+
+  "Get FileName via dialog": {
+    "scope": "python",
+    "prefix": "tkfdfn",
+    "body": "$filename = filedialog.askopenfilename(initialdir=\"/\", title=\"$title\",\nfiletypes=((\"$option\", \"$option_extention\"), (\"All files\", \"*.*\")))",
+    "description": "Creates a FileName dialog"
+  },
+
+  "Get Directory via Dialog": {
+    "scope": "python",
+    "prefix": "tkfdfd",
+    "body": "$directory_name = filedialog.askdirectory(initialdir=\"/\",\ntitle=\"$title\")",
+    "description": "Creates a Directory"
+  }
+}

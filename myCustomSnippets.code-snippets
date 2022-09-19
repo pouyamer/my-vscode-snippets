@@ -1,0 +1,299 @@
+{
+  // scope: HTML
+  // #region HTML
+  "Generate html code with js and css connected": {
+    "scope": "html",
+    "prefix": "!!",
+    "body": [
+      "<!DOCTYPE html>",
+      "<html>",
+      "",
+      "<head>",
+      "    <meta charset=\"utf-8\">",
+      "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">",
+      "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+      "    <title>Document</title>",
+      "    <link rel=\"stylesheet\" href=\"./style.css\">",
+      "    <script src=\"./script.js\" defer></script>",
+      "</head>",
+      "",
+      "<body>",
+      "    $1",
+      "</body>",
+      "",
+      "</html>"
+    ],
+    "description": "Generate html code with js and css connected"
+  },
+  "Canvas": {
+    "scope": "html",
+    "prefix": "canvas",
+    "body": "<canvas class=\"canvas\">Your Browser doesn't support HTML Canvas :(</canvas>",
+    "description": "Canvas"
+  },
+  // #endregion
+
+  // scope: javascript, typescript
+  // #region JS_TS
+  "Generate code for canvas config": {
+    "scope": "javascript, typescript",
+    "prefix": "canvas",
+    "body": [
+      "const canvas = document.querySelector(\".canvas\")",
+      "const ctx = canvas.getContext(\"2d\")",
+      "const size={width: 300, height: 300}",
+      "canvas.width = size.width",
+      "canvas.height = size.height"
+    ]
+  },
+  "Make cartesian coordinate system": {
+    "scope": "javascript, typescript",
+    "prefix": "cartesian",
+    "body": [
+      "class Point {",
+      "constructor(x, y) {",
+      "this.x = x",
+      "this.y = y",
+      "// canvas x and y:",
+      "this.cX = x * ${1:canvasMultiplier} + canvas.width / 2",
+      "this.cY = -y * ${1:canvasMultiplier} + canvas.height / 2",
+      "}",
+      "}"
+    ]
+  },
+  "Make Circle with Cartesian coordinate system": {
+    "scope": "javascript, typescript",
+    "prefix": "cartcir",
+    "body": [
+      "class Circle {",
+      "constructor(point, r) {",
+      "this.point = point",
+      "this.r = r",
+      "}",
+
+      "draw = methodName => {",
+      "ctx.beginPath()",
+      "ctx.arc(",
+      "this.point.cX,",
+      "this.point.cY,",
+      "this.r * canvasMultiplier,",
+      "0,",
+      "2 * Math.PI",
+      ")",
+      "methodName === \"fill\" ? ctx.fill() : ctx.stroke()",
+      "}",
+      "stroke = () => {",
+      "this.draw(\"stroke\")",
+      "}",
+      "fill = () => {",
+      "this.draw(\"fill\")",
+      "}",
+      "}"
+    ],
+    "description": "Make Circle with Cartesian coordinate system"
+  },
+  "Solve quadratic equation": {
+    "scope": "javascript, typescript",
+    "prefix": "quad",
+    "body": [
+      "const solveQuadratic = (a, b, c) => {",
+      "const d = b * b - 4 * a * c",
+      "return d < 0",
+      "? [undefined, undefined]",
+      ": [(-b + Math.sqrt(d)) / (2 * a), (-b - Math.sqrt(d)) / (2 * a)]",
+      "}"
+    ],
+    "description": "Solve quadratic equation"
+  },
+  "Draw Line Using Points": {
+    "scope": "javascript, typescript",
+    "prefix": "dlpoints",
+    "body": [
+      "const drawLine = (point1, point2) => {",
+      "ctx.beginPath()",
+      "ctx.moveTo(point1.cX, point1.cY)",
+      "ctx.lineTo(point2.cX, point2.cY)",
+      "ctx.stroke()",
+      "}"
+    ],
+    "description": "Draw Line Using Points"
+  },
+  "Print to console": {
+    "scope": "javascript, typescript",
+    "prefix": "log",
+    "body": ["console.log('$1');", "$2"],
+    "description": "Log output to console"
+  },
+  "Get a random integer between two numbers": {
+    "scope": "javascript, typescript",
+    "prefix": "randbetween",
+    "body": [
+      "Math.floor(Math.random() * (${1:max} - ${2:min} + 1)) + ${2:min}"
+    ],
+    "description": "Get a random integer between two numbers"
+  },
+  "React Fragment short form": {
+    "scope": "javascript, typescript",
+    "prefix": "reactfragment",
+    "body": "<>$1</>",
+    "description": "React Fragment short form"
+  },
+  "Stringify hsl": {
+    "scope": "javascript, typescript",
+    "prefix": "hsl",
+    "body": "const hslStringify = (h, s, l, a = 1) => `hsl(${h}, ${s}%, ${l}%, ${a})`",
+    "description": "Stringify hsl"
+  },
+  "Two digits": {
+    "scope": "javascript, typescript",
+    "prefix": "twodigits",
+    "body": "const toTwoDigitFormat = number => (number < 10 ? `0${number}` : number)",
+    "description": "Two digits"
+  },
+  "AM or PM": {
+    "scope": "javascript, typescript",
+    "prefix": "ampm",
+    "body": [
+      "const ampmDeterminer = hour24 => {",
+      "if (hour24 >= 0 && hour24 < 12) return \"AM\"",
+      "if (hour24 >= 12 && hour24 < 24) return \"PM\"",
+      "}"
+    ],
+    "description": "return AM or PM based on hour (24 hour clock)"
+  },
+  "To Twelve Hour Clock": {
+    "scope": "javascript, typescript",
+    "prefix": "totwelvehour",
+    "body": [],
+    "description": "Transforms 24h Clock to 12h Clock"
+  },
+  "Cubic Bezier": {
+    "scope": "javascript, typescript",
+    "prefix": "cbezier",
+    "body": [
+      "const cubicBezier = (x0, y0, x1, y1) => {",
+      "if (!(x0 >= 0 && x0 <= 1 && x1 >= 0 && x1 <= 1))",
+      "throw new Error(",
+      "`CubicBezier x1 & x2 values must be { 0 < x < 1 }, got { x1 : ${x0}, x2: ${x1} }`",
+      ")",
+      "const ax = 1.0 - (x1 = 3.0 * (x1 - x0) - (x0 *= 3.0)) - x0,",
+      "ay = 1.0 - (y1 = 3.0 * (y1 - y0) - (y0 *= 3.0)) - y0",
+      "let i = 0,",
+      "r = 0.0,",
+      "s = 0.0,",
+      "d = 0.0,",
+      "x = 0.0",
+      "return t => {",
+      "for (r = t, i = 0; 32 > i; i++)",
+      "if (1e-5 > Math.abs((x = r * (r * (r * ax + x1) + x0) - t)))",
+      "return r * (r * (r * ay + y1) + y0)",
+      "else if (1e-5 > Math.abs((d = r * (r * ax * 3.0 + x1 * 2.0) + x0))) break",
+      "else r -= x / d",
+      "if ((s = 0.0) > (r = t)) return 0",
+      "else if ((d = 1.0) < r) return 1",
+      "while (d > s)",
+      "if (1e-5 > Math.abs((x = r * (r * (r * ax + x1) + x0)) - t)) break",
+      "else t > x ? (s = r) : (d = r), (r = 0.5 * (d - s) + s)",
+      "return r * (r * (r * ay + y1) + y0)",
+      "}",
+      "}"
+    ],
+    "description": "cubic bezier that takes current 2 points and currentTime"
+  },
+  "Cubic Bezier with time and value (requires cubic bezier function)": {
+    "scope": "javascript, typescript",
+    "prefix": "cbeziertv",
+    "body": "const cubicBezierBasedOnTimeAndValue = (startingValue,endValue,x0,y0,x1,y1,currentTime)=>cubicBezier(x0, y0, x1, y1)(currentTime) * (endValue - startingValue) + startingValue"
+  },
+
+  // #endregion
+
+  // scope: CSS
+  // #region CSS
+
+  "CSS Reset": {
+    "scope": "css",
+    "prefix": "css-reset",
+    "body": [
+      "",
+      "*,*::after,*::before{margin:0;padding:0;box-sizing:border-box;}a{text-decoration:none;}a:focus{outline:none;}ul{list-style:none;}"
+    ]
+  },
+  "CSS Reset Short Form": {
+    "scope": "css",
+    "prefix": "css-reset-short",
+    "body": [
+      "",
+      "*,*::after,*::before{margin:0;padding:0;box-sizing:border-box;}"
+    ]
+  },
+  "Make an element unselectable with all prefixes": {
+    "scope": "css",
+    "prefix": "unsfull",
+    "body": [
+      "",
+      "-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;"
+    ]
+  },
+  "Make an element unselectable (Shorthand)": {
+    "scope": "css",
+    "prefix": "uns",
+    "body": ["", "user-select:none;"]
+  },
+
+  // #endregion
+
+  // scope: PHP
+  // #region PHP
+  "Generate php code": {
+    "scope": "php",
+    "prefix": "php",
+    "body": ["<?php", "$1", "?>"],
+    "description": "Generate php code"
+  },
+  "var_dump in style": {
+    "scope": "php",
+    "prefix": "dump",
+    "body": ["echo '<pre>';", "var_dump($1);", "echo '</pre>';"],
+    "description": "var_dump in style"
+  },
+  "echo bool": {
+    "scope": "php",
+    "prefix": "echobool",
+    "body": ["echo $1 ? 'True' : 'False'.'<br>';"],
+    "description": "echo bool"
+  },
+  "line break": {
+    "scope": "php",
+    "prefix": "br",
+    "body": ["'<br>';"],
+    "description": "line break"
+  },
+  "is_set": {
+    "scope": "php",
+    "prefix": "isset",
+    "body": ["isset($1);"],
+    "description": "Check if variable is defined or not"
+  },
+  "define a constant": {
+    "scope": "php",
+    "prefix": "const",
+    "body": ["define('$1', $2);"],
+    "description": "Defines a constant"
+  },
+  // #endregion
+
+  // scope: Rust
+  // #region RUST
+  "get user input": {
+    "scope": "rust",
+    "prefix": "inp",
+    "body": [
+      "let mut ${1:input} = String::new();",
+      "io::stdin()",
+      ".read_line(&mut ${1:input})",
+      ".expect(\"failed to readline\");"
+    ]
+  }
+  // endregion
+}
